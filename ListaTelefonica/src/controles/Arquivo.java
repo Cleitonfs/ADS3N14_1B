@@ -68,9 +68,6 @@ public class Arquivo {
         br.close();
         fr.close();
         
-        
-        /// ai q ve a bambiarra !!
-        // pelomenos funciona
         String linhas[] = new String[i];
         fr = new FileReader(this.file);
         br = new BufferedReader(fr);

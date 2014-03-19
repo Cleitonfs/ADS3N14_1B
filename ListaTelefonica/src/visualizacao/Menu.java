@@ -72,9 +72,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Adicionar contato");
-
                     novoContato();
-
                     opcao = 0;
                     break;
                 case 4:

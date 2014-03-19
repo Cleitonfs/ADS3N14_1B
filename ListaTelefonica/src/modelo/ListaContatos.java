@@ -39,21 +39,6 @@ public class ListaContatos {
             Logger.getLogger(ListaContatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-        
-        
-        /*
-        try {
-            String linha;
-            while( ( linha = a.leLinhaArquivo() ) != null ){
-                Contato contato = new Contato(linha);
-                Nodo<Contato> nodo = new Nodo<Contato>(contato);
-                this.lista.append(nodo);
-            }
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-                */
     }
     
     public void exibe(){

@@ -32,8 +32,6 @@ public class Contato implements Comparable<Contato> {
         nPos = strLinha.indexOf(";", pPos+1);
         this.ddd = Integer.valueOf(strLinha.substring(pPos, nPos));
         pPos = nPos+1;
-        // ele não pode buscar por ;, é o ultimo campo, não há ; então pega oque sobrou da linha !
-        //nPos = strLinha.indexOf(";", pPos+1);
         this.telefone = Integer.valueOf(strLinha.substring(pPos, strLinha.length()));
     }
 
