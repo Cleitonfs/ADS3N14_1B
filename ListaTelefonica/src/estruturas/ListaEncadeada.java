@@ -1,7 +1,6 @@
 package estruturas;
 
 import static java.lang.System.out;
-import modelo.Contato;
 
 public class ListaEncadeada<T> {
 

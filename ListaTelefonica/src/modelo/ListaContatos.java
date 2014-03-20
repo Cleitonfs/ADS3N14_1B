@@ -5,10 +5,6 @@ import estruturas.ListaEncadeada;
 import estruturas.ListaOrdenada;
 import estruturas.Nodo;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import static java.lang.System.out;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
