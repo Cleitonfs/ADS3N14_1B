@@ -36,7 +36,7 @@ public class Menu {
     }
 
     public static boolean novoContato() {
-        
+
         try {
             Scanner iUsuario = new Scanner(System.in);
             System.out.println("Digite o nome do contato: ");
@@ -48,26 +48,26 @@ public class Menu {
             Contato contato = new Contato(nome, ddd, telefone);
             contato.escreveContato();
             return true;
-        } catch (Exception e){
-            System.out.println("Erro: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
             return false;
         }
     }
-    
 
     public static void main(String[] args) {
 
         int opcao = 0;
         ListaContatos listaContatos = new ListaContatos();
-        
-        
+
+
         while (opcao == 0) {
             opcao = exibeMenu();
 
             switch (opcao) {
                 case 2:
                     System.out.println("Listar agenda");
-                    listaContatos.exibe();
+                    //listar();
+                    listaContatos.exibeListaOrdenada();
                     opcao = 0;
                     break;
                 case 3:
@@ -94,4 +94,32 @@ public class Menu {
 
     }
 
+    public static void listar() {
+        Scanner menu = new Scanner(System.in);
+        int opcao = 0;
+        ListaContatos listaContatos = new ListaContatos();
+
+        System.out.println("(1) Listar ordenado\n(2) Listar ordem do arquivo\n(99) Voltar ao menu anterior\n");
+        while (opcao == 0) {
+            try {
+                opcao = menu.nextInt();
+                switch (opcao) {
+                    case 1:
+                        listaContatos.exibeListaOrdenada();
+                        break;
+                    case 2:
+                        listaContatos.exibeListaDesordenada();
+                        break;
+                    case 99:
+                        break;
+                    default:
+                        opcao = 0;
+                        System.out.println("Opção inválida!");
+                }
+            } catch (Exception e) {
+                System.out.println("Digite uma opção válida!");
+            }
+        }
+
+    }
 }

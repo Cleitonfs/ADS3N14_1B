@@ -1,12 +1,21 @@
 package estruturas;
 
 import static java.lang.System.out;
+import modelo.Contato;
 
 public class ListaEncadeada<T> {
 
 	protected Nodo<T> head;
 	protected Nodo<T> tail;
 	
+        public Nodo<T> getHead(){
+            return this.head;
+        }
+        
+        public Nodo<T> getTail(){
+            return this.tail;
+        }
+        
 	public void insert(Nodo<T> novo)
 	{
 		novo.setNext(head);
@@ -35,8 +44,8 @@ public class ListaEncadeada<T> {
 	public void print() {
 		Nodo<T> elem = head;
 		do {
-			out.println(elem.getData());
-			elem = elem.getNext();
+                    out.println(elem.getData());
+                    elem = elem.getNext();
 		} while (elem != null);		
 	}
 	

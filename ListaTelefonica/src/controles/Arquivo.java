@@ -23,12 +23,16 @@ import modelo.Contato;
 public class Arquivo {
 
     private File file;
-    
-    
+    private FileReader fr;
+    private BufferedReader br;
 
-    public Arquivo() {
-        this.file = new File("d:\\temp\\contatos.txt" );
-        if(!this.file.exists()){
+    public Arquivo() throws FileNotFoundException {
+
+        this.file = new File("contatos.txt");
+        this.fr = new FileReader(this.file);
+        this.br = new BufferedReader(this.fr);
+
+        if (!this.file.exists()) {
             try {
                 this.file.createNewFile();
             } catch (IOException ex) {
@@ -36,59 +40,63 @@ public class Arquivo {
             }
         }
     }
-    
+
     public void escreveLinhaArquivo(String linha) throws IOException {
-        FileWriter fr = new FileWriter(this.file,true);
+        FileWriter fr = new FileWriter(this.file, true);
         BufferedWriter bw = new BufferedWriter(fr);
+        bw.newLine();
         bw.append(linha);
         bw.close();
     }
-    
-   
-    public String leLinhaArquivo () throws FileNotFoundException, IOException {
-        FileReader fr = new FileReader(this.file);
-        BufferedReader br = new BufferedReader(fr);
-        String linha = br.readLine();
-        br.close();
+
+    public String leLinhaArquivo() {
+        String linha = null;
+        try {
+            linha = this.br.readLine();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         return linha;
     }
-    
+
     public String[] leTodoArquivo() throws FileNotFoundException, IOException {
-        
-        
+
         FileReader fr = new FileReader(this.file);
         BufferedReader br = new BufferedReader(fr);
-        int i=0;
-        String linha = null;
-        while(true){
-            linha = br.readLine();
-            if(linha==null)  break;
+        int i = 0;
+        String linha = "";
+        while ((linha = br.readLine()) != null) {
             i++;
         }
         br.close();
         fr.close();
-        
-        String linhas[] = new String[i];
-        fr = new FileReader(this.file);
-        br = new BufferedReader(fr);
-        i=0;
-        while(true){
-            linhas[i] = br.readLine();
-            if(linha==null)  break;
-            i++;
-        }
-        br.close();
-        fr.close();
-        
-        
 
-        
-        return linhas;
+        if (i > 0) {
+            linha = "";
+            String linhas[] = new String[i];
+            fr = new FileReader(this.file);
+            br = new BufferedReader(fr);
+            i = 0;
+            while ((linha = br.readLine()) != null) {
+                linhas[i] = linha;
+                i++;
+            }
+            br.close();
+            fr.close();
+            return linhas;
+        }
+
+        return null;
+
     }
-    
-    
+
     public void fechaArquivo() {
-        
+        if (this.br != null) {
+            try {
+                this.br.close();
+            } catch (IOException ex) {
+                System.out.println("Erro ao tentar fechar o arquivo.");
+            }
+        }
     }
-
 }

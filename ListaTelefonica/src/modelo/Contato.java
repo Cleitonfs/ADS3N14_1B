@@ -21,18 +21,22 @@ public class Contato implements Comparable<Contato> {
     private int ddd;
     private int telefone;
 
+    public Contato() {
+    }
+
     public Contato(String strLinha) {
         int pPos = 0;
         int nPos = strLinha.indexOf(";", pPos);
         this.id = Integer.valueOf(strLinha.substring(pPos, nPos));
-        pPos = nPos+1;
-        nPos = strLinha.indexOf(";", pPos+1);
+        pPos = nPos + 1;
+        nPos = strLinha.indexOf(";", pPos + 1);
         this.nome = strLinha.substring(pPos, nPos);
-        pPos = nPos+1;
-        nPos = strLinha.indexOf(";", pPos+1);
+        pPos = nPos + 1;
+        nPos = strLinha.indexOf(";", pPos + 1);
         this.ddd = Integer.valueOf(strLinha.substring(pPos, nPos));
-        pPos = nPos+1;
-        this.telefone = Integer.valueOf(strLinha.substring(pPos, strLinha.length()));
+        pPos = nPos + 1;
+        nPos = strLinha.indexOf(";", pPos + 1);
+        this.telefone = Integer.valueOf(strLinha.substring(pPos, nPos));
     }
 
     public Contato(String nome, int ddd, int telefone) {
@@ -74,10 +78,10 @@ public class Contato implements Comparable<Contato> {
         this.nome = nome;
     }
 
-    public boolean escreveContato(){
-        
-        Arquivo arquivo = new Arquivo();
+    public boolean escreveContato() {
+
         try {
+            Arquivo arquivo = new Arquivo();
             StringBuilder sb = new StringBuilder();
             sb.append(this.id);
             sb.append(";");
@@ -86,22 +90,22 @@ public class Contato implements Comparable<Contato> {
             sb.append(this.ddd);
             sb.append(";");
             sb.append(this.telefone);
+            sb.append(";");
             arquivo.escreveLinhaArquivo(sb.toString());
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Contato.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
     }
-    
+
     @Override
     public int compareTo(Contato o) {
         return this.getNome().toString().compareTo(o.getNome().toString());
     }
-    
-    public String toString(){
-        return "ID: "+id + " Nome: "+nome+ " DDD: "+ddd + " Telefone: "+telefone;
-    }
 
+    public String toString() {
+        return "ID: " + id + " Nome: " + nome + " DDD: " + ddd + " Telefone: " + telefone;
+    }
 }

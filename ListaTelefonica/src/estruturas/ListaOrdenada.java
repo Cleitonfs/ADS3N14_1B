@@ -5,41 +5,46 @@ import modelo.Contato;
 public class ListaOrdenada<T extends Comparable<T>> extends ListaEncadeada<T> {
 
     private Nodo<T> procuraNodo(T data) {
-        Nodo<T> nodo = head;
+        Nodo<T> atual = head;
         Nodo<T> anterior = null;
 
-        while (nodo != null) {
-            int cmp = nodo.getData().compareTo(data);
-            if (cmp == 0) {
-                return nodo;
+        while (atual != null) {
+            int cmp = atual.getData().compareTo(data);
+            if (cmp < 0) {
+                anterior = atual;
+                atual = atual.getNext();
+            } else if (cmp == 0) {
+                return atual;
+            } else {
+                break;
             }
-            if (cmp > 0) {
-                return anterior;
-            }
-            anterior = nodo;
-            nodo = nodo.getNext();
         }
+        return anterior;
 
-        return nodo;
+    }
+
+    public Nodo<T> getHead() {
+        return this.head;
     }
 
     @Override
     public void insert(Nodo<T> novo) {
         Nodo<T> anterior = procuraNodo(novo.getData());
 
-        if (anterior != null) {
-            novo.setNext(anterior.getNext());
-            anterior.setNext(novo);
-            if (anterior == tail) {
-                tail = novo;
+        if (anterior == null) {
+            novo.setNext(this.head);
+            this.head = novo;
+            if (this.tail == null) {
+                this.tail = head;
             }
         } else {
-            if (tail != null) {
-                tail.setNext(novo);
+            if (tail == anterior) {
+                this.tail.setNext(novo);
+                this.tail = novo;
             } else {
-                head = novo;
+                novo.setNext(anterior.getNext());
+                anterior.setNext(novo);
             }
-            tail = novo;
         }
     }
 
@@ -53,22 +58,26 @@ public class ListaOrdenada<T extends Comparable<T>> extends ListaEncadeada<T> {
         insert(novo);
     }
 
-    /*
     public static void main(String[] args) {
-        Contato reg = new Contato();
-        reg.setNome("teste");
-        reg.setTelefone("(51)9723-0660");
-
-        // criar lista
-        ListaOrdenada<Contato> lista = new ListaOrdenada<>();
-        Nodo<Contato> novo = new Nodo<Contato>(reg);
-
+        Contato reg;
+        
+        ListaOrdenada<Contato> lista = new ListaOrdenada<>();;
+        Nodo<Contato> novo;        
+        reg  = new Contato();
+        reg.setNome("xxx");
+        reg.setDdd(51);
+        reg.setTelefone(97230660);
+        
+        novo = new Nodo<Contato>(reg);
         lista.insert(novo);
-        lista.insert(new Nodo<Contato>(reg), novo);
-        lista.append(new Nodo<Contato>(reg));
-        lista.insert(new Nodo<Contato>(reg), novo);
+        reg  = new Contato();
+        reg.setNome("teste");
+        reg.setDdd(51);
+        reg.setTelefone(97230662);
+        
+        novo = new Nodo<Contato>(reg);        
+        lista.insert(novo);
+        
         lista.print();
     }
-    */
-
 }
