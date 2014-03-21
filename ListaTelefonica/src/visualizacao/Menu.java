@@ -42,8 +42,9 @@ public class Menu {
             int ddd = iUsuario.nextInt();
             System.out.println("Digite o telefone: ");
             int telefone = iUsuario.nextInt();
-            Contato contato = new Contato(nome, ddd, telefone);
+            Contato contato = new Contato(listaContatos.getNextId(), nome, ddd, telefone);
             contato.escreveContato();
+            listaContatos = new ListaContatos();
             return true;
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());

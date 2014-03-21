@@ -34,7 +34,7 @@ public class Contato implements Comparable<Contato> {
         this.telefone = Integer.valueOf(strLinha.substring(pPos, nPos));
     }
 
-    public Contato(String nome, int ddd, int telefone) {
+    public Contato(int id, String nome, int ddd, int telefone) {
         this.id = id;
         this.nome = nome;
         this.ddd = ddd;

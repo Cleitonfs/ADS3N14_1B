@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 public class ListaContatos {
 
     private ListaOrdenada listaOrdenada;
-    Nodo<Contato> registroAtual;
+    private Nodo<Contato> registroAtual;
     private int sequencia;
 
     public ListaContatos() {
@@ -38,22 +38,22 @@ public class ListaContatos {
 
     }
 
-    public int getSequencia() {
-        return sequencia;
+    public int getNextId() {
+        return sequencia + 1;
     }
 
     public boolean filtroContato(String primeiraLetra) {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         while (nodo != null) {
-            if(nodo.getData().getNome().startsWith(primeiraLetra)){
+            if (nodo.getData().getNome().startsWith(primeiraLetra)) {
                 this.registroAtual = nodo;
                 break;
             }
             nodo = nodo.getNext();
         }
-        
-        if(this.registroAtual==null) {
-            System.out.println("Nenhum registro encontrado para a letra ["+primeiraLetra+"].");
+
+        if (this.registroAtual == null) {
+            System.out.println("Nenhum registro encontrado para a letra [" + primeiraLetra + "].");
             return false;
         } else {
             escreveRegistroUsuario(this.registroAtual);
@@ -61,13 +61,13 @@ public class ListaContatos {
         }
 
     }
-    
+
     public void listaProximo() {
-        if(this.registroAtual==null){
+        if (this.registroAtual == null) {
             this.registroAtual = this.listaOrdenada.getHead();
         } else {
             this.registroAtual = this.registroAtual.getNext();
-            if(this.registroAtual == null) {
+            if (this.registroAtual == null) {
                 this.registroAtual = this.listaOrdenada.getHead();
             }
         }
@@ -76,12 +76,23 @@ public class ListaContatos {
 
     public void listaAnterior() {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
+        Nodo<Contato> anterior = nodo;
         while (nodo != null) {
-            escreveRegistroUsuario(nodo);
             nodo = nodo.getNext();
+            if (this.registroAtual == anterior) {
+                this.registroAtual = this.listaOrdenada.getTail();
+                break;
+            } else {
+                if (this.registroAtual == nodo) {
+                    this.registroAtual = anterior;
+                    break;
+                }
+            }
+            anterior = nodo;
         }
+        escreveRegistroUsuario(this.registroAtual);
     }
-    
+
     public void exibeListaOrdenada() {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         while (nodo != null) {
@@ -89,9 +100,9 @@ public class ListaContatos {
             nodo = nodo.getNext();
         }
     }
-    
-    public void escreveRegistroUsuario(Nodo<Contato> nodo){
+
+    public void escreveRegistroUsuario(Nodo<Contato> nodo) {
         System.out.println(new StringBuilder().append("[ Id: ").append(nodo.getData().getId()).append(" ] Nome: ").append(nodo.getData().getNome()).append(" - Telefone: (").append(nodo.getData().getDdd()).append(")").append(nodo.getData().getTelefone()).toString());
     }
-    
+
 }

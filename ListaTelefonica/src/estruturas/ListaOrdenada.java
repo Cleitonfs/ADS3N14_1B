@@ -26,6 +26,10 @@ public class ListaOrdenada<T extends Comparable<T>> extends ListaEncadeada<T> {
     public Nodo<T> getHead() {
         return this.head;
     }
+    
+    public Nodo<T> getTail(){
+        return this.tail;
+    }
 
     @Override
     public void insert(Nodo<T> novo) {
