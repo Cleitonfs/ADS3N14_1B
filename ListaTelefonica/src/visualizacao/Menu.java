@@ -10,6 +10,8 @@ import modelo.ListaContatos;
  */
 public class Menu {
 
+    private static ListaContatos listaContatos;
+    
     private static int exibeMenu() {
         int opcao = 0;
         Scanner menu = new Scanner(System.in);
@@ -52,26 +54,24 @@ public class Menu {
     public static void main(String[] args) {
 
         int opcao = 0;
-        ListaContatos listaContatos = new ListaContatos();
-
+        listaContatos = new ListaContatos();
 
         while (opcao == 0) {
             opcao = exibeMenu();
 
             switch (opcao) {
                 case 2:
-                    System.out.println("Listar agenda");
-                    //listar();
-                    listaContatos.exibeListaOrdenada();
+                    listar();
                     opcao = 0;
                     break;
                 case 3:
-                    System.out.println("Adicionar contato");
+                    System.out.println("Opção adicionar contato");
                     novoContato();
                     opcao = 0;
                     break;
                 case 4:
-                    System.out.println("Procurar na lista");
+                    System.out.println("Opção procurar na lista");
+                    procuraLista();
                     opcao = 0;
                     break;
                 case 5:
@@ -79,7 +79,7 @@ public class Menu {
                     opcao = 0;
                     break;
                 case 99:
-                    System.out.println("Saindo do sistema.");
+                    System.out.println("Tchau!");
                     System.exit(0);
                 default:
                     System.out.println("Opção inválida!");
@@ -88,33 +88,55 @@ public class Menu {
         }
 
     }
-
-    public static void listar() {
-        Scanner menu = new Scanner(System.in);
-        int opcao = 0;
-        ListaContatos listaContatos = new ListaContatos();
-
-        System.out.println("(1) Listar ordenado\n(2) Listar ordem do arquivo\n(99) Voltar ao menu anterior\n");
-        while (opcao == 0) {
-            try {
-                opcao = menu.nextInt();
-                switch (opcao) {
-                    case 1:
-                        listaContatos.exibeListaOrdenada();
-                        break;
-                    case 2:
-                        listaContatos.exibeListaDesordenada();
-                        break;
-                    case 99:
-                        break;
-                    default:
-                        opcao = 0;
-                        System.out.println("Opção inválida!");
+    
+    public static void procuraLista() {
+        Scanner entradaUsuario = new Scanner(System.in);
+        System.out.println("Digite a primeira letra a exibir ou digite 99 para sair: ");
+        String opcao = "";
+        while (opcao!="99") {
+            opcao = entradaUsuario.nextLine();
+            if(opcao=="99") {
+                break;
+            } else {
+                if(opcao!="") {
+                    if(listaContatos.filtroContato(opcao)){
+                        exibeProcuraAnteriorProximo();
+                    }
+                    opcao = "99";
+                } else {
+                    System.out.println("É necessário informar pelo menos uma letra para iniciar a pesquisa.");
                 }
-            } catch (Exception e) {
-                System.out.println("Digite uma opção válida!");
             }
         }
-
+    }
+    
+    public static void exibeProcuraAnteriorProximo() {
+        Scanner entradaUsuario = new Scanner(System.in);
+        System.out.println("Opções: (1) Registro anterior | (2) Próximo registro. | (99) Sair.");
+        Integer opcao = 0;
+        while(opcao==0) {
+            try {
+                opcao = entradaUsuario.nextInt();
+                if(opcao==1||opcao==2) {
+                    if(opcao==1) {
+                        listaContatos.listaAnterior();
+                    } else {
+                        listaContatos.listaProximo();
+                    }
+                    opcao = 99;
+                    exibeProcuraAnteriorProximo();
+                }
+            } catch ( Exception e ) {
+                System.out.println("Opção inválida!");
+                opcao = 0;
+            }
+            
+        }
+    }
+    
+    public static void listar() {
+        System.out.println("Inicio da lista: ");
+        listaContatos.exibeListaOrdenada();
+        System.out.println("Fim da lista.");
     }
 }
