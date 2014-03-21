@@ -31,15 +31,26 @@ public class Arquivo {
                 System.out.println("Erro ao tentar abrir o arquivo.");
             }
         }
-        
+
     }
 
     public void escreveLinhaArquivo(String linha) throws IOException {
         FileWriter fr = new FileWriter(this.file, true);
         BufferedWriter bw = new BufferedWriter(fr);
-        bw.newLine();
         bw.append(linha);
+        bw.newLine();
         bw.close();
+    }
+
+    public void limpaArquivo() {
+        FileWriter fr;
+        try {
+            fr = new FileWriter(this.file);
+            BufferedWriter bw = new BufferedWriter(fr);
+            bw.close();
+        } catch (IOException ex) {
+            System.out.println("Erro ao tentar limpar o arquivo.");
+        }
     }
 
     public String leLinhaArquivo() {

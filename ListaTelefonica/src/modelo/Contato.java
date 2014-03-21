@@ -78,18 +78,11 @@ public class Contato implements Comparable<Contato> {
         try {
             Arquivo arquivo = new Arquivo();
             StringBuilder sb = new StringBuilder();
-            sb.append(this.id);
-            sb.append(";");
-            sb.append(this.nome);
-            sb.append(";");
-            sb.append(this.ddd);
-            sb.append(";");
-            sb.append(this.telefone);
-            sb.append(";");
+            sb.append(this.id).append(";").append(this.nome).append(";").append(this.ddd).append(";").append(this.telefone).append(";");
             arquivo.escreveLinhaArquivo(sb.toString());
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(Contato.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao escrever no arquivo.");
             return false;
         }
 
@@ -100,7 +93,4 @@ public class Contato implements Comparable<Contato> {
         return this.getNome().toString().compareTo(o.getNome().toString());
     }
 
-    public String toString() {
-        return "ID: " + id + " Nome: " + nome + " DDD: " + ddd + " Telefone: " + telefone;
-    }
 }

@@ -11,7 +11,7 @@ import modelo.ListaContatos;
 public class Menu {
 
     private static ListaContatos listaContatos;
-    
+
     private static int exibeMenu() {
         int opcao = 0;
         Scanner menu = new Scanner(System.in);
@@ -77,6 +77,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("Exluir contato");
+                    removeContato();
                     opcao = 0;
                     break;
                 case 99:
@@ -89,18 +90,38 @@ public class Menu {
         }
 
     }
-    
+
+    public static void removeContato() {
+        Scanner entradaUsuario = new Scanner(System.in);
+        System.out.println("Digite o id do contato que deseja remover, ou 0 para sair: ");
+        String opcao = entradaUsuario.nextLine();
+
+        while (!opcao.equals("sair")) {
+            try {
+                int id = Integer.valueOf(opcao);
+                if(listaContatos.removeContatoById(id)){
+                    listaContatos = new ListaContatos();
+                    System.out.println("Contato ["+id+"] removido!");
+                }
+                opcao = "sair";
+            } catch (Exception e) {
+                System.out.println("Digite um valor válido.");
+            }
+        }
+    }
+
     public static void procuraLista() {
+
         Scanner entradaUsuario = new Scanner(System.in);
         System.out.println("Digite a primeira letra a exibir ou digite 99 para sair: ");
         String opcao = "";
-        while (opcao!="99") {
+        while (opcao != "99") {
             opcao = entradaUsuario.nextLine();
-            if(opcao=="99") {
+            if (opcao == "99") {
                 break;
             } else {
-                if(opcao!="") {
-                    if(listaContatos.filtroContato(opcao)){
+                if (opcao != "") {
+                    if (listaContatos.filtroContato(opcao)) {
                         exibeProcuraAnteriorProximo();
                     }
                     opcao = "99";
@@ -110,16 +131,16 @@ public class Menu {
             }
         }
     }
-    
+
     public static void exibeProcuraAnteriorProximo() {
         Scanner entradaUsuario = new Scanner(System.in);
         System.out.println("Opções: (1) Registro anterior | (2) Próximo registro. | (99) Sair.");
         Integer opcao = 0;
-        while(opcao==0) {
+        while (opcao == 0) {
             try {
                 opcao = entradaUsuario.nextInt();
-                if(opcao==1||opcao==2) {
-                    if(opcao==1) {
+                if (opcao == 1 || opcao == 2) {
+                    if (opcao == 1) {
                         listaContatos.listaAnterior();
                     } else {
                         listaContatos.listaProximo();
@@ -127,14 +148,14 @@ public class Menu {
                     opcao = 99;
                     exibeProcuraAnteriorProximo();
                 }
-            } catch ( Exception e ) {
+            } catch (Exception e) {
                 System.out.println("Opção inválida!");
                 opcao = 0;
             }
-            
+
         }
     }
-    
+
     public static void listar() {
         System.out.println("Inicio da lista: ");
         listaContatos.exibeListaOrdenada();

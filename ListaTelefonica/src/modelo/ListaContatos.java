@@ -5,6 +5,7 @@ import estruturas.ListaEncadeada;
 import estruturas.ListaOrdenada;
 import estruturas.Nodo;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
@@ -59,6 +60,45 @@ public class ListaContatos {
             escreveRegistroUsuario(this.registroAtual);
             return true;
         }
+
+    }
+
+    public boolean removeContatoById(int id) {
+
+        ListaEncadeada lista = new ListaEncadeada();
+        Arquivo a;
+        String linha = "";
+        boolean apagar = false;
+
+        try {
+            a = new Arquivo();
+            while ((linha = a.leLinhaArquivo()) != null) {
+                Contato contato = new Contato(linha);
+                Nodo<Contato> nodo = new Nodo<Contato>(contato);
+                if (nodo.getData().getId() != id) {
+                    lista.append(nodo);
+                    apagar = true;
+                }
+            }
+            
+            if(apagar) {
+                a.limpaArquivo();
+                Nodo<Contato> nodo = lista.getHead();            
+                while(nodo!=null) {
+                    try {
+                        a.escreveLinhaArquivo(new StringBuilder().append(nodo.getData().getId()).append(";").append(nodo.getData().getNome()).append(";").append(nodo.getData().getDdd()).append(";").append(nodo.getData().getTelefone()).append(";").toString());
+                    } catch ( IOException e ) {
+                        System.out.println("Erro ao tentar escrever no arquivo.");
+                    }
+                    nodo = nodo.getNext();
+                }
+                return true;
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Erro ao tentar ler o arquivo.");
+            return false;
+        }
+        return false;
 
     }
 
