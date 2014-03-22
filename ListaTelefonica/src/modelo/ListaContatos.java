@@ -78,6 +78,7 @@ public class ListaContatos {
                 Nodo<Contato> nodo = new Nodo<Contato>(contato);
                 if (nodo.getData().getId() != id) {
                     lista.append(nodo);
+                } else {
                     apagar = true;
                 }
             }
@@ -94,13 +95,13 @@ public class ListaContatos {
                     nodo = nodo.getNext();
                 }
                 return true;
+            } else {
+                return false;
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Erro ao tentar ler o arquivo.");
             return false;
         }
-        return false;
-
     }
 
     public void listaProximo() {

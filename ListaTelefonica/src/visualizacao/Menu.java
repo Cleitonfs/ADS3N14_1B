@@ -22,11 +22,7 @@ public class Menu {
 
         try {
             System.out.println("Digite a opção desejada: ");
-            System.out.println("\t2 - Listar contatos");
-            System.out.println("\t3 - Adicionar contato");
-            System.out.println("\t4 - Procurar contatos");
-            System.out.println("\t5 - Excluir contato");
-            System.out.println("\t99 - Sair");
+            System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Excluir contato").append(" | 99 - Sair.").toString());
             opcao = menu.nextInt();
         } catch (Exception e) {
             opcao = 1;
@@ -113,6 +109,8 @@ public class Menu {
                 if(listaContatos.removeContatoById(id)){
                     listaContatos = new ListaContatos();
                     System.out.println("Contato ["+id+"] removido!");
+                } else {
+                    System.out.println("Contato ["+id+"] inexistente.");
                 }
                 opcao = "sair";
             } catch (Exception e) {
