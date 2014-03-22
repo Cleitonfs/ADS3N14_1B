@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  *
  * @author Lucas
+ * Classe responsável pela manipulacao da lista de contatos, ordenada ou encadeada.
  */
 public class ListaContatos {
 

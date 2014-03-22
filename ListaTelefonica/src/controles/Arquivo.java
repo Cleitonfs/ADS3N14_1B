@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Classe responsavel pela manipulacao de arquivo.
  * @author Lucas
  */
 public class Arquivo {
@@ -18,6 +18,10 @@ public class Arquivo {
     private FileReader fr;
     private BufferedReader br;
 
+    /**
+     * Classe construtora, abre o arquivo e inicialia as variaveis.
+     * @throws FileNotFoundException 
+     */
     public Arquivo() throws FileNotFoundException {
 
         this.file = new File("contatos.txt");
@@ -34,6 +38,11 @@ public class Arquivo {
 
     }
 
+    /**
+     * Recebe uma string que contem os dados do contato, separados por ";" indicados pelo modelo do contato.
+     * @param linha
+     * @throws IOException 
+     */
     public void escreveLinhaArquivo(String linha) throws IOException {
         FileWriter fr = new FileWriter(this.file, true);
         BufferedWriter bw = new BufferedWriter(fr);
@@ -42,6 +51,9 @@ public class Arquivo {
         bw.close();
     }
 
+    /**
+     * Trunca o arquivo para o tamanho "0"
+     */
     public void limpaArquivo() {
         FileWriter fr;
         try {
@@ -53,6 +65,10 @@ public class Arquivo {
         }
     }
 
+    /**
+     * Le a proxima linha do arquivo, retorna null se for o final do arquivo (EOF)
+     * @return 
+     */
     public String leLinhaArquivo() {
         String linha = null;
         try {
@@ -63,37 +79,9 @@ public class Arquivo {
         return linha;
     }
 
-    public String[] leTodoArquivo() throws FileNotFoundException, IOException {
-
-        FileReader fr = new FileReader(this.file);
-        BufferedReader br = new BufferedReader(fr);
-        int i = 0;
-        String linha = "";
-        while ((linha = br.readLine()) != null) {
-            i++;
-        }
-        br.close();
-        fr.close();
-
-        if (i > 0) {
-            linha = "";
-            String linhas[] = new String[i];
-            fr = new FileReader(this.file);
-            br = new BufferedReader(fr);
-            i = 0;
-            while ((linha = br.readLine()) != null) {
-                linhas[i] = linha;
-                i++;
-            }
-            br.close();
-            fr.close();
-            return linhas;
-        }
-
-        return null;
-
-    }
-
+    /**
+     * Fecha o arquivo, aberto anteriormente.
+     */
     public void fechaArquivo() {
         if (this.br != null) {
             try {

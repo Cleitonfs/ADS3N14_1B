@@ -5,13 +5,17 @@ import modelo.Contato;
 import modelo.ListaContatos;
 
 /**
- *
+ * @version 1.3
  * @author Lucas
  */
 public class Menu {
 
     private static ListaContatos listaContatos;
-
+    
+    /**
+     * Método que exibe o menu principal ao usuario. Retorna a opcao adquirida atraves de Java.Util.Scanner
+     * @return numero da opcao selecionado pelo usuario
+     */
     private static int exibeMenu() {
         int opcao = 0;
         Scanner menu = new Scanner(System.in);
@@ -32,6 +36,10 @@ public class Menu {
 
     }
 
+    /**
+     * Cria um usuario no sistema atraves da solicicao de dados utilizando a classe Java.Util.Scanner para interface com o usuario.
+     * @return true, false
+     */
     public static boolean novoContato() {
 
         try {
@@ -91,6 +99,9 @@ public class Menu {
 
     }
 
+    /**
+     * Método que solicita Id do contato que deseja remover. Exibe mensagens com o status da solicitacao.
+     */
     public static void removeContato() {
         Scanner entradaUsuario = new Scanner(System.in);
         System.out.println("Digite o id do contato que deseja remover, ou 0 para sair: ");
@@ -110,6 +121,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Solicita os dados do usuario para aplicar o filtro na lista de contatos.
+     */
     public static void procuraLista() {
 
         Scanner entradaUsuario = new Scanner(System.in);
@@ -132,6 +146,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Metodo que exibe menu listar contato proximo/anterior. Retorna ao menu principal se o usuario informar 99.
+     */
     public static void exibeProcuraAnteriorProximo() {
         Scanner entradaUsuario = new Scanner(System.in);
         System.out.println("Opções: (1) Registro anterior | (2) Próximo registro. | (99) Sair.");
@@ -156,6 +173,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Metodo que lista os contatos contidos na ListaOrdenada.
+     */
     public static void listar() {
         System.out.println("Inicio da lista: ");
         listaContatos.exibeListaOrdenada();

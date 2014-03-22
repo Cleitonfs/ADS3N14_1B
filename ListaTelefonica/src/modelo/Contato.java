@@ -2,11 +2,9 @@ package modelo;
 
 import controles.Arquivo;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
+ * Classe responsavel pelo Objeto contato, que contem dados como id, nome, ddd e telefone
  * @author Lucas
  */
 public class Contato implements Comparable<Contato> {
@@ -19,6 +17,11 @@ public class Contato implements Comparable<Contato> {
     public Contato() {
     }
 
+    /**
+     * Metodo que cria o contato, recebe uma string que espera o padrao id;nome;ddd;telefone;
+     * Usa metodologia de posicionamento de String
+     * @param strLinha 
+     */
     public Contato(String strLinha) {
         int pPos = 0;
         int nPos = strLinha.indexOf(";", pPos);
@@ -34,6 +37,13 @@ public class Contato implements Comparable<Contato> {
         this.telefone = Integer.valueOf(strLinha.substring(pPos, nPos));
     }
 
+    /**
+     * Metodo de sobrescrita que gera um contato
+     * @param id
+     * @param nome
+     * @param ddd
+     * @param telefone 
+     */
     public Contato(int id, String nome, int ddd, int telefone) {
         this.id = id;
         this.nome = nome;
@@ -73,6 +83,10 @@ public class Contato implements Comparable<Contato> {
         this.nome = nome;
     }
 
+    /**
+     * Metodo responsavel por instanciar e escrever um novo contato no arquivo contato.txt
+     * @return 
+     */
     public boolean escreveContato() {
 
         try {
