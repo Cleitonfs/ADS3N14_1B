@@ -186,7 +186,7 @@ public class ListaContatos {
             }
             
             if(encontrou!=null) {
-                System.out.println("Registro encontrado: ");
+                System.out.println("Registro encontrado ("+String.valueOf(comparacoes)+" comparacoes): ");
                 escreveRegistroUsuario(new Nodo<>(encontrou));
             } else {
                 System.out.println("Nenhum registro encontrado.");
