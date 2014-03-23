@@ -22,7 +22,7 @@ public class Menu {
 
         try {
             System.out.println("Digite a opção desejada: ");
-            System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Excluir contato").append(" | 99 - Sair.").toString());
+            System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Procura Binária").append(" | 6 - Excluir contato").append(" | 99 - Sair.").toString());
             opcao = menu.nextInt();
         } catch (Exception e) {
             opcao = 1;
@@ -80,6 +80,11 @@ public class Menu {
                     opcao = 0;
                     break;
                 case 5:
+                    System.out.println("Busca binária");
+                    buscaBinaria();
+                    opcao = 0;
+                    break;
+                case 6:
                     System.out.println("Exluir contato");
                     removeContato();
                     opcao = 0;
@@ -119,6 +124,16 @@ public class Menu {
         }
     }
 
+    public static void buscaBinaria() {
+        Scanner ent = new Scanner(System.in);
+        String opcao = ent.nextLine();
+        if(opcao!="sair") {
+            if(listaContatos.buscaBinaria(opcao)>0){
+                exibeProcuraAnteriorProximo();
+            }
+        }
+    }
+    
     /**
      * Solicita os dados do usuario para aplicar o filtro na lista de contatos.
      */

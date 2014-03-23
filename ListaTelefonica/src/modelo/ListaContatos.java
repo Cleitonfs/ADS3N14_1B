@@ -6,6 +6,8 @@ import estruturas.ListaOrdenada;
 import estruturas.Nodo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -143,6 +145,58 @@ public class ListaContatos {
         }
     }
 
+    public int buscaBinaria (String fragmento) {
+        Nodo<Contato> nodo = this.listaOrdenada.getHead();
+        List<Contato> lista = new ArrayList<>();
+        Contato encontrou = null;
+        int comparacoes = 0;
+        
+        while (nodo != null) {
+            lista.add(nodo.getData());
+            nodo = nodo.getNext();
+        }
+        
+        if(lista.size()>0){
+            
+            int metade = Math.round(lista.size()/2);
+            
+            if(lista.get(metade).getNome().substring(0, 1).compareToIgnoreCase(fragmento)==0){
+                /* Entao o elemento e igual */
+                comparacoes++;
+                registroAtual = new Nodo<>(lista.get(metade));
+                encontrou = lista.get(metade);
+            } else if(lista.get(metade).getNome().substring(0, 1).compareToIgnoreCase(fragmento)>0) {
+                /* Entao o elemento e maior */
+                for(int i=metade;i>=0;i--) {
+                    comparacoes++;
+                    if(lista.get(i).getNome().substring(0, 1).compareToIgnoreCase(fragmento)==0) {
+                        registroAtual = new Nodo<>(lista.get(i));
+                        encontrou = lista.get(i);
+                    }
+                }
+            } else {
+                /* Entao o elemento e menor. */
+                for(int i=metade;i<lista.size();i++) {
+                    comparacoes++;
+                    if(lista.get(i).getNome().substring(0, 1).compareToIgnoreCase(fragmento)==0) {
+                        registroAtual = new Nodo<>(lista.get(i));
+                        encontrou = lista.get(i);
+                    }                    
+                }
+            }
+            
+            if(encontrou!=null) {
+                System.out.println("Registro encontrado: ");
+                escreveRegistroUsuario(new Nodo<>(encontrou));
+            } else {
+                System.out.println("Nenhum registro encontrado.");
+            }
+            
+        }
+        return comparacoes;
+        
+    }
+    
     public void escreveRegistroUsuario(Nodo<Contato> nodo) {
         System.out.println(new StringBuilder().append("[ Id: ").append(nodo.getData().getId()).append(" ] Nome: ").append(nodo.getData().getNome()).append(" - Telefone: (").append(nodo.getData().getDdd()).append(")").append(nodo.getData().getTelefone()).toString());
     }
