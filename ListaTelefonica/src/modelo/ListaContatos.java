@@ -89,11 +89,7 @@ public class ListaContatos {
                 a.limpaArquivo();
                 Nodo<Contato> nodo = lista.getHead();            
                 while(nodo!=null) {
-                    try {
-                        a.escreveLinhaArquivo(new StringBuilder().append(nodo.getData().getId()).append(";").append(nodo.getData().getNome()).append(";").append(nodo.getData().getDdd()).append(";").append(nodo.getData().getTelefone()).append(";").toString());
-                    } catch ( IOException e ) {
-                        System.out.println("Erro ao tentar escrever no arquivo.");
-                    }
+                    a.escreveLinhaArquivo(new StringBuilder().append(nodo.getData().getId()).append(";").append(nodo.getData().getNome()).append(";").append(nodo.getData().getDdd()).append(";").append(nodo.getData().getTelefone()).append(";").toString());
                     nodo = nodo.getNext();
                 }
                 return true;
@@ -158,7 +154,7 @@ public class ListaContatos {
         
         if(lista.size()>0){
             
-            int metade = Math.round(lista.size()/2);
+            int metade = Math.round((float) lista.size()/2);
             
             if(lista.get(metade).getNome().substring(0, 1).compareToIgnoreCase(fragmento)==0){
                 /* Entao o elemento e igual */

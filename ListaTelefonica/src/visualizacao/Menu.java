@@ -18,9 +18,8 @@ public class Menu {
      */
     private static int exibeMenu() {
         int opcao = 0;
-        Scanner menu = new Scanner(System.in);
-
         try {
+            Scanner menu = new Scanner(System.in);
             System.out.println("Digite a opção desejada: ");
             System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Procura Binária").append(" | 6 - Excluir contato").append(" | 99 - Sair.").toString());
             opcao = menu.nextInt();
@@ -139,10 +138,11 @@ public class Menu {
      */
     public static void procuraLista() {
 
-        Scanner entradaUsuario = new Scanner(System.in);
+        
         System.out.println("Digite a primeira letra a exibir ou digite 99 para sair: ");
         String opcao = "";
         while (opcao != "99") {
+            Scanner entradaUsuario = new Scanner(System.in);
             opcao = entradaUsuario.nextLine();
             if (opcao == "99") {
                 break;
@@ -163,11 +163,11 @@ public class Menu {
      * Metodo que exibe menu listar contato proximo/anterior. Retorna ao menu principal se o usuario informar 99.
      */
     public static void exibeProcuraAnteriorProximo() {
-        Scanner entradaUsuario = new Scanner(System.in);
-        System.out.println("Opções: (1) Registro anterior | (2) Próximo registro. | (99) Sair.");
         Integer opcao = 0;
         while (opcao == 0) {
             try {
+                Scanner entradaUsuario = new Scanner(System.in);
+                System.out.println("Opções: (1) Registro anterior | (2) Próximo registro. | (99) Sair.");
                 opcao = entradaUsuario.nextInt();
                 if (opcao == 1 || opcao == 2) {
                     if (opcao == 1) {

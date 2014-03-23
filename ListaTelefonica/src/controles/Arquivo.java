@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Classe responsavel pela manipulacao de arquivo.
@@ -30,7 +32,9 @@ public class Arquivo {
 
         if (!this.file.exists()) {
             try {
-                this.file.createNewFile();
+                if(!this.file.createNewFile()){
+                    System.out.println("Erro ao tentar abrir o arquivo.");
+                }
             } catch (IOException ex) {
                 System.out.println("Erro ao tentar abrir o arquivo.");
             }
@@ -43,12 +47,18 @@ public class Arquivo {
      * @param linha
      * @throws IOException 
      */
-    public void escreveLinhaArquivo(String linha) throws IOException {
-        FileWriter fr = new FileWriter(this.file, true);
-        BufferedWriter bw = new BufferedWriter(fr);
-        bw.append(linha);
-        bw.newLine();
-        bw.close();
+    public void escreveLinhaArquivo(String linha) {
+        
+        FileWriter fr;
+        try {
+            fr = new FileWriter(this.file, true);
+            BufferedWriter bw = new BufferedWriter(fr);
+            bw.append(linha);
+            bw.newLine();
+            bw.close();            
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
