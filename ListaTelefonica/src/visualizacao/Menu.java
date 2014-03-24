@@ -123,6 +123,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Metodo que solicita ao usuário uma letra para que a consulta seja realizada.
+     * Se o usuario digita o numero 99 volta ao menu anterior
+     */
     public static void buscaBinaria() {
         Scanner ent = new Scanner(System.in);
         String opcao = ent.nextLine();

@@ -20,6 +20,9 @@ public class ListaContatos {
     private Nodo<Contato> registroAtual;
     private int sequencia;
 
+    /**
+     * Metodo contrutor que inicia uma lista ordenada.
+     */
     public ListaContatos() {
 
         Arquivo a;
@@ -46,6 +49,12 @@ public class ListaContatos {
         return sequencia + 1;
     }
 
+    /**
+     * Filtra o contato, recebe como parametro um fragmento, e efetua um laco, verificando se o item
+     * contem o fragmento informado pelo usuario
+     * @param primeiraLetra
+     * @return falso se nao encontar um registro.
+     */
     public boolean filtroContato(String primeiraLetra) {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         while (nodo != null) {
@@ -65,7 +74,15 @@ public class ListaContatos {
         }
 
     }
-
+    
+    
+    /**
+     * Recebe um id do usuario, recria a lista em uma lista encadeana, na ordem natural que foi gravada
+     * menos o id informado pelo usuario.
+     * Se o id existe na lista, reescreve o arquivo com base nesta lista.
+     * @param id
+     * @return verdadeiro se o registro foi encontrado e removido.
+     */
     public boolean removeContatoById(int id) {
 
         ListaEncadeada lista = new ListaEncadeada();
@@ -101,7 +118,11 @@ public class ListaContatos {
             return false;
         }
     }
-
+    
+    /**
+     * Metodo que seta o registro atual para o proximo registro, se o registro atual e o ultimo
+     * seta o primeiro registro, formando um loop
+     */
     public void listaProximo() {
         if (this.registroAtual == null) {
             this.registroAtual = this.listaOrdenada.getHead();
@@ -114,6 +135,10 @@ public class ListaContatos {
         escreveRegistroUsuario(this.registroAtual);
     }
 
+    /**
+     * Metodo que seta o registro atual para o proximo registro, se o registro atual e o primeiro
+     * seta o ultimo registro, realizando um loop
+     */
     public void listaAnterior() {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         Nodo<Contato> anterior = nodo;
@@ -133,6 +158,9 @@ public class ListaContatos {
         escreveRegistroUsuario(this.registroAtual);
     }
 
+    /**
+     * Mostra na tela para o usuário uma lista ordenada.
+     */
     public void exibeListaOrdenada() {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         while (nodo != null) {
@@ -141,6 +169,14 @@ public class ListaContatos {
         }
     }
 
+    /**
+     * Realiza uma busca utilizando a metodologia de pesquisa binaria.
+     * Os nodos são inseridos em um Array, este array e dividido ao meio
+     * Se o valor anterior for maior que o fragmento pesquisado busca da metade ate o final da lista
+     * senao busca da metade ate o inicio da lista.
+     * @param fragmento
+     * @return retorna o numero de comparacoes realizadas até encontrar o fragmento.
+     */
     public int buscaBinaria (String fragmento) {
         Nodo<Contato> nodo = this.listaOrdenada.getHead();
         List<Contato> lista = new ArrayList<>();
@@ -193,6 +229,10 @@ public class ListaContatos {
         
     }
     
+    /**
+     * Metodo que escreve na tela o contato.
+     * @param nodo 
+     */
     public void escreveRegistroUsuario(Nodo<Contato> nodo) {
         System.out.println(new StringBuilder().append("[ Id: ").append(nodo.getData().getId()).append(" ] Nome: ").append(nodo.getData().getNome()).append(" - Telefone: (").append(nodo.getData().getDdd()).append(")").append(nodo.getData().getTelefone()).toString());
     }
