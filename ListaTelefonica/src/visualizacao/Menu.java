@@ -13,20 +13,19 @@ public class Menu {
     private static ListaContatos listaContatos;
     
     /**
-     * M√©todo que exibe o menu principal ao usuario. Retorna a opcao adquirida atraves de Java.Util.Scanner
+     * Metodo que exibe o menu principal ao usuario. Retorna a opcao adquirida atraves de Java.Util.Scanner
      * @return numero da opcao selecionado pelo usuario
      */
     private static int exibeMenu() {
         int opcao = 0;
+        Scanner menu = new Scanner(System.in);
         try {
-            Scanner menu = new Scanner(System.in);
-            System.out.println("Digite a op√ß√£o desejada: ");
-            System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Procura Bin√°ria").append(" | 6 - Excluir contato").append(" | 99 - Sair.").toString());
+            System.out.println("Digite a opÁ„o desejada: ");
+            System.out.println(new StringBuilder("2 - Listar contatos").append(" | 3 - Adicionar contato").append(" | 4 - Procurar contatos").append(" | 5 - Procura Bin·ria").append(" | 6 - Excluir contato").append(" | 99 - Sair.").toString());
             opcao = menu.nextInt();
         } catch (Exception e) {
             opcao = 1;
         }
-
         return opcao;
 
     }
@@ -69,17 +68,17 @@ public class Menu {
                     opcao = 0;
                     break;
                 case 3:
-                    System.out.println("Op√ß√£o adicionar contato");
+                    System.out.println("OpÁ„o adicionar contato");
                     novoContato();
                     opcao = 0;
                     break;
                 case 4:
-                    System.out.println("Op√ß√£o procurar na lista");
+                    System.out.println("OpÁ„o procurar na lista");
                     procuraLista();
                     opcao = 0;
                     break;
                 case 5:
-                    System.out.println("Busca bin√°ria");
+                    System.out.println("Busca bin·ria");
                     buscaBinaria();
                     opcao = 0;
                     break;
@@ -92,7 +91,7 @@ public class Menu {
                     System.out.println("Tchau!");
                     System.exit(0);
                 default:
-                    System.out.println("Op√ß√£o inv√°lida!");
+                    System.out.println("OpÁ„o inv·lida!");
                     opcao = 0;
             }
         }
@@ -100,7 +99,7 @@ public class Menu {
     }
 
     /**
-     * M√©todo que solicita Id do contato que deseja remover. Exibe mensagens com o status da solicitacao.
+     * Metodo que solicita Id do contato que deseja remover. Exibe mensagens com o status da solicitacao.
      */
     public static void removeContato() {
         Scanner entradaUsuario = new Scanner(System.in);
@@ -118,13 +117,13 @@ public class Menu {
                 }
                 opcao = "sair";
             } catch (Exception e) {
-                System.out.println("Digite um valor v√°lido.");
+                System.out.println("Digite um valor v·lido.");
             }
         }
     }
 
     /**
-     * Metodo que solicita ao usu√°rio uma letra para que a consulta seja realizada.
+     * Metodo que solicita ao usuario uma letra para que a consulta seja realizada.
      * Se o usuario digita o numero 99 volta ao menu anterior
      */
     public static void buscaBinaria() {
@@ -151,13 +150,13 @@ public class Menu {
             if (opcao == "99") {
                 break;
             } else {
-                if (opcao != "") {
+                if (!opcao.equals("")) {
                     if (listaContatos.filtroContato(opcao)) {
                         exibeProcuraAnteriorProximo();
                     }
                     opcao = "99";
                 } else {
-                    System.out.println("√â necess√°rio informar pelo menos uma letra para iniciar a pesquisa.");
+                    System.out.println("… necess·rio informar pelo menos uma letra para iniciar a pesquisa.");
                 }
             }
         }
@@ -171,7 +170,7 @@ public class Menu {
         while (opcao == 0) {
             try {
                 Scanner entradaUsuario = new Scanner(System.in);
-                System.out.println("Op√ß√µes: (1) Registro anterior | (2) Pr√≥ximo registro. | (99) Sair.");
+                System.out.println("OpÁıes: (1) Registro anterior | (2) PrÛximo registro. | (99) Sair.");
                 opcao = entradaUsuario.nextInt();
                 if (opcao == 1 || opcao == 2) {
                     if (opcao == 1) {
@@ -183,7 +182,7 @@ public class Menu {
                     exibeProcuraAnteriorProximo();
                 }
             } catch (Exception e) {
-                System.out.println("Op√ß√£o inv√°lida!");
+                System.out.println("OpÁ„o Inv·lida!");
                 opcao = 0;
             }
 

@@ -5,18 +5,17 @@ import estruturas.ListaEncadeada;
 import estruturas.ListaOrdenada;
 import estruturas.Nodo;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Lucas
- * Classe responsável pela manipulacao da lista de contatos, ordenada ou encadeada.
+ * Classe responsavel pela manipulacao da lista de contatos, ordenada ou encadeada.
  */
 public class ListaContatos {
 
-    private ListaOrdenada listaOrdenada;
+    private ListaOrdenada<Contato> listaOrdenada;
     private Nodo<Contato> registroAtual;
     private int sequencia;
 
@@ -27,7 +26,7 @@ public class ListaContatos {
 
         Arquivo a;
         sequencia = 0;
-        this.listaOrdenada = new ListaOrdenada();
+        this.listaOrdenada = new ListaOrdenada<Contato>();
 
         try {
             a = new Arquivo();
@@ -85,7 +84,7 @@ public class ListaContatos {
      */
     public boolean removeContatoById(int id) {
 
-        ListaEncadeada lista = new ListaEncadeada();
+        ListaEncadeada<Contato> lista = new ListaEncadeada<Contato>();
         Arquivo a;
         String linha = "";
         boolean apagar = false;
