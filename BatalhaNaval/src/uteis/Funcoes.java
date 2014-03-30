@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 
 /**
- *
+ * Classe que contem funcoes uteis para a aplicacao
  * @author Lucas Pacheco Oliveira
  */
 public class Funcoes {

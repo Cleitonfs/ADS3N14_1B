@@ -8,10 +8,9 @@ import java.util.Random;
 import modelo.Retorno;
 import modelo.Jogo;
 import uteis.Funcoes;
-import visualizacao.VisualizacaoJogo;
 
 /**
- *
+ * Classe responsavel por manipular o tabuleiro do jogo
  * @author Lucas Pacheco Oliveira
  */
 public class Tabuleiro {
@@ -19,6 +18,9 @@ public class Tabuleiro {
     private ArrayList<ArrayList<String>> linhas;
     private String coordenada;
 
+    /**
+     * Monta um tabuleiro, com 10 linha e 10 colunas. Preenche todas as posicoes com "."
+     */
     public Tabuleiro() {
         this.linhas = new ArrayList<>();
         ArrayList<String> linha;
@@ -31,10 +33,24 @@ public class Tabuleiro {
         }
     }
 
+    /**
+     * Retorna o tabuleiro montado
+     * @return 
+     */
     public ArrayList<ArrayList<String>> getTabuleiro() {
         return this.linhas;
     }
 
+    /**
+     * Inicia o tabuleiro, adiciona as peças, aleatoriamente
+     * Adiciona 1 porta-avioes [A] (5 posicoes);
+     * <ul>
+     * <li>2 Destroyers [B,C] (4 posicoes)</li>
+     * <li>2 Fragatas [D,E] (3 posicoes)</li>
+     * <li>3 Torpedeiros [F,G,H] (2 posicoes)</li>
+     * <li>5 Submarinos [I,J,K,L,M] (1 posicao)</li>
+     * </ul>
+     */
     public void inicia() {
         Navios navio = new Navios();
         Random rnd = new Random();
@@ -63,6 +79,14 @@ public class Tabuleiro {
         }
     }
 
+    /**
+     * Verifica e aloca na matriz um objeto. Retorna falso caso não seja possivel alocar, ou se houver sobreposicao de objetos.
+     * @param peca
+     * @param linha Linha que devera ser alocada a peca
+     * @param coluna Coluna que devera ser alocada a peca
+     * @param strPeca Letra referente a peca que sera adicionado
+     * @return 
+     */
     private boolean adiciona(List<String> peca, int linha, int coluna, String strPeca) {
         int j = 0;
         if (coluna + peca.size() > 10) {
@@ -81,6 +105,11 @@ public class Tabuleiro {
         return true;
     }
 
+    /**
+     * Recebe o valor do usuario e o transforma em coordenadas
+     * @param coordenada
+     * @return 
+     */
     private ArrayList<Integer> getCoordenadas(String coordenada) {
         try {
             this.coordenada = coordenada;
@@ -93,6 +122,12 @@ public class Tabuleiro {
         }
     }
 
+    /**
+     * Verifica se existem objetos da mesma peca na linha da ultima jogada. Retorna verdadeiro se não houver mais regitros da peca na linha
+     * @param atingido
+     * @param linha
+     * @return 
+     */
     public boolean navioAtingido(String atingido, int linha) {
         for (int i = 0; i < this.linhas.get(linha).size(); i++) {
             if (this.linhas.get(linha).get(i).equals(atingido)) {
@@ -102,6 +137,12 @@ public class Tabuleiro {
         return true;
     }
 
+    /**
+     * Executa e marca a jogada. Se a posicao conter um objeto ou "."
+     * @param coordenadas
+     * @param jogo
+     * @return 
+     */
     public Retorno realizaJogada(ArrayList<Integer> coordenadas, Jogo jogo) {
         Retorno e = new Retorno();
         if (!this.linhas.get(coordenadas.get(0)).get(coordenadas.get(1)).equals("O") && !this.linhas.get(coordenadas.get(0)).get(coordenadas.get(1)).equals("-")) {
@@ -125,6 +166,10 @@ public class Tabuleiro {
         return e;
     }
 
+    /**
+     * Analisa todas as linhas verificando se existem valores diferentes de ".", "O" ou "-"
+     * @return verdadeiro se o jogo chegou ao fim.
+     */
     public boolean fim() {
         for (int i = 0; i < linhas.size(); i++) {
             for (int j = 0; j < linhas.get(i).size(); j++) {
@@ -136,6 +181,12 @@ public class Tabuleiro {
         return true;
     }
 
+    /**
+     * Resgata as coordenadas do usuario, trata e executa a jogada nas posicoes informadas pelo usuario.
+     * @param coordenadaUsuario
+     * @param jogo
+     * @return 
+     */
     public Retorno joga(String coordenadaUsuario, Jogo jogo) {
 
         ArrayList<Integer> coordenadas = this.getCoordenadas(coordenadaUsuario);

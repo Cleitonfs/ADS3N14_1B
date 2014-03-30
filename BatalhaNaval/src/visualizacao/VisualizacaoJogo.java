@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import modelo.Retorno;
 import modelo.Jogo;
-import uteis.Funcoes;
 
 /**
  *
@@ -16,17 +15,21 @@ public class VisualizacaoJogo {
     private Jogo jogo;
     Tabuleiro tabuleiro;
 
+    /**
+     * Método construtor que inicializa a pontuacao do jogador, e o tabuleiro.
+     */
     public VisualizacaoJogo() {
         this.jogo = new Jogo();
         this.tabuleiro = new Tabuleiro();
     }
     
-    public int retornaNumAlfabeto(String letra) {
-        ArrayList<String> letras = Funcoes.listaAlfabeto();
-        return letras.indexOf(letra);
-    }
-    
-    public void escreveTabueiro(Tabuleiro tabuleiro, boolean disistiu) {
+    /**
+     * Recebe e manipula o tabuleiro, escreve "." onde ainda não contér "O" ou "-"
+     * Se desistiu for verdadeiro, mostra o tabuleiro com todos os navios (remove mascara)
+     * @param tabuleiro
+     * @param desistiu 
+     */
+    public void escreveTabueiro(Tabuleiro tabuleiro, boolean desistiu) {
         StringBuilder strLinha = new StringBuilder();
         ArrayList<ArrayList<String>> tab = tabuleiro.getTabuleiro();
         
@@ -48,6 +51,10 @@ public class VisualizacaoJogo {
         
     }
 
+    /**
+     * Resgata via console a entrada do usuario, espera uma Letra de A a J e um numero de 0 a 9
+     * @return retorna o valor recebido via console do usuario.
+     */
     private String solicitaPosicaoUsuario() {
         Scanner entradaUsuario = new Scanner(System.in);
         System.out.println("Digite a posição para a próxima jogada: ");

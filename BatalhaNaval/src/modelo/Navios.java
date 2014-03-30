@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 
 /**
- *
+ * Classe que contem os objetos do jogo
  * @author Lucas Pacheco Oliveira
  */
 public class Navios {
@@ -15,6 +15,9 @@ public class Navios {
     private ArrayList<String> torpedeiro;
     private ArrayList<String> submarino;
 
+    /**
+     * Construtor que inicializa os objetos.
+     */
     public Navios() {
         this.portaAvioes = new ArrayList<>(asList("P","P","P","P","P"));
         this.destroyer = new ArrayList<>(asList("D","D","D","D"));
