@@ -12,8 +12,13 @@ public class Jogo {
         return this.pontuacao;
     }
     
+    
+    public void acertouNavio() {
+        pontuacao+=5;
+    }
+    
     public void acertou() {
-        pontuacao++;
+        pontuacao+=3;
     }
     
     public void errou(){

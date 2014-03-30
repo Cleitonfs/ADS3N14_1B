@@ -3,7 +3,7 @@ package visualizacao;
 import controle.Tabuleiro;
 import java.util.ArrayList;
 import java.util.Scanner;
-import modelo.Erro;
+import modelo.Retorno;
 import modelo.Jogo;
 import uteis.Funcoes;
 
@@ -14,9 +14,11 @@ import uteis.Funcoes;
 public class VisualizacaoJogo {
     
     private Jogo jogo;
+    Tabuleiro tabuleiro;
 
     public VisualizacaoJogo() {
         this.jogo = new Jogo();
+        this.tabuleiro = new Tabuleiro();
     }
     
     public int retornaNumAlfabeto(String letra) {
@@ -24,7 +26,7 @@ public class VisualizacaoJogo {
         return letras.indexOf(letra);
     }
     
-    public void escreveTabueiro(Tabuleiro tabuleiro) {
+    public void escreveTabueiro(Tabuleiro tabuleiro, boolean disistiu) {
         StringBuilder strLinha = new StringBuilder();
         ArrayList<ArrayList<String>> tab = tabuleiro.getTabuleiro();
         
@@ -33,11 +35,10 @@ public class VisualizacaoJogo {
             strLinha.append(i);
             strLinha.append("  ");
             for(int j=0;j<tab.get(i).size();j++){
-                
                 if(tab.get(i).get(j).equals("-")||tab.get(i).get(j).equals("O")) {
                     strLinha.append(tab.get(i).get(j));
                 } else {
-                    strLinha.append(".");
+                    strLinha.append(tab.get(i).get(j));
                 }
                 strLinha.append("  ");
             }
@@ -49,30 +50,33 @@ public class VisualizacaoJogo {
 
     private String solicitaPosicaoUsuario() {
         Scanner entradaUsuario = new Scanner(System.in);
-        String coordenada = "";        
         System.out.println("Digite a posição para a próxima jogada: ");
-        coordenada = entradaUsuario.nextLine();
-        entradaUsuario.close();
-        
+        String coordenada = entradaUsuario.next();
         if(coordenada.equals("sair")) {
             System.out.println("Você desistiu com : "+jogo.getPontuacao()+" pontos.");
             System.exit(0);
         }
-        
         return coordenada;
     }
     
     public static void main(String[] args) {
-        Tabuleiro tabuleiro = new Tabuleiro();
-        tabuleiro.inicia();
         
-        VisualizacaoJogo jogo = new VisualizacaoJogo();
-        jogo.escreveTabueiro(tabuleiro);
-        String coordenadaUsuario = jogo.solicitaPosicaoUsuario();
+        VisualizacaoJogo vJogo = new VisualizacaoJogo();
+        vJogo.tabuleiro.inicia();
+        String coordenadaUsuario = "";
         
-        Erro jogada = tabuleiro.joga(coordenadaUsuario);
-        if(jogada!=null){
-            System.out.println("Erro: \n"+jogada.getMensagem());
+        while(vJogo.jogo.getPontuacao()>0&&!vJogo.tabuleiro.fim()) {
+            vJogo.escreveTabueiro(vJogo.tabuleiro, false);
+            coordenadaUsuario = vJogo.solicitaPosicaoUsuario();
+            Retorno jogada = vJogo.tabuleiro.joga(coordenadaUsuario, vJogo.jogo);
+            System.out.println(jogada.getTipo()+" - "+jogada.getMensagem()+" - pontuação: ["+vJogo.jogo.getPontuacao()+"].");
+        }
+        
+        vJogo.escreveTabueiro(vJogo.tabuleiro, true);
+        if(vJogo.jogo.getPontuacao()>0) {
+            System.out.println("Você ganhou com "+vJogo.jogo.getPontuacao()+" pontos.");
+        } else {
+            System.out.println("Você perdeu. Looser");
         }
         
     }
