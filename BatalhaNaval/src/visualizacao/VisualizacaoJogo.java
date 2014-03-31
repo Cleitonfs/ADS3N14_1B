@@ -40,8 +40,10 @@ public class VisualizacaoJogo {
             for(int j=0;j<tab.get(i).size();j++){
                 if(tab.get(i).get(j).equals("-")||tab.get(i).get(j).equals("O")) {
                     strLinha.append(tab.get(i).get(j));
+                    
                 } else {
-                    strLinha.append(tab.get(i).get(j));
+                    strLinha.append(".");
+                    //strLinha.append(tab.get(i).get(j));
                 }
                 strLinha.append("  ");
             }
