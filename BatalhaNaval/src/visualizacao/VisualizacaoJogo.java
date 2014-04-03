@@ -59,7 +59,7 @@ public class VisualizacaoJogo {
      */
     private String solicitaPosicaoUsuario() {
         Scanner entradaUsuario = new Scanner(System.in);
-        System.out.println("Digite a posição para a próxima jogada: ");
+        System.out.println("Digite a posição para a próxima jogada:\nEx: (A0,C7,H9) ou sair para abandonar a partida");
         String coordenada = entradaUsuario.next();
         if(coordenada.equals("sair")) {
             System.out.println("Você desistiu com : "+jogo.getPontuacao()+" pontos.");
@@ -85,7 +85,7 @@ public class VisualizacaoJogo {
         if(vJogo.jogo.getPontuacao()>0) {
             System.out.println("Você ganhou com "+vJogo.jogo.getPontuacao()+" pontos.");
         } else {
-            System.out.println("Você perdeu. Looser");
+            System.out.println("Você perdeu.");
         }
         
     }
