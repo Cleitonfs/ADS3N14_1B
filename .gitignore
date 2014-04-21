@@ -6,3 +6,10 @@
 *.ear
 /HelloWorld/nbproject/private/
 /Pessoa/nbproject/private/
+/BatalhaNaval/nbproject/private/
+/BatalhaNaval/build/
+/BatalhaNaval/dist/
+/MOL/nbproject/private/
+/WebMOL/nbproject/private/
+/WebMOL/build/
+/WebMOL/dist/
