@@ -88,21 +88,43 @@ public class Ordenacao {
      * trocas efetuadas durante a execução do algoritmo.
      */
     public DadosOrdenacao bubbleSort(int[] vetor) {
+        
         DadosOrdenacao dadosOrdenacao = new DadosOrdenacao();
         int comparacoes = 0;
         int trocas = 0;
-        int troca = 0;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                comparacoes++;
-                if (vetor[j] > vetor[j + 1]) {
-                    troca = vetor[j];
-                    vetor[j] = vetor[j + 1];
-                    vetor[j + 1] = troca;
-                    trocas++;
-                }
+
+        int dadoTroca;
+        int indiceProximo;
+        int i = vetor.length - 1;
+        int j;
+
+        while (true) {
+            ++comparacoes;
+            if (!(i > 0)) {
+                break;
             }
+
+            j = 0;
+            while (true) {
+                ++comparacoes;
+                if (!(j < i)) {
+                    break;
+                }
+
+                indiceProximo = j + 1;
+                ++comparacoes;
+                if (vetor[j] > vetor[indiceProximo]) {
+                    ++trocas;
+                    dadoTroca = vetor[j];
+                    vetor[j] = vetor[indiceProximo];
+                    vetor[indiceProximo] = dadoTroca;
+                }
+
+                ++j;
+            }
+            --i;
         }
+
         dadosOrdenacao.setTrocas(trocas);
         dadosOrdenacao.setComparacoes(comparacoes);
         dadosOrdenacao.setVetorOrdenado(vetor);

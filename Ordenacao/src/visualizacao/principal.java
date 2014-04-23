@@ -7,6 +7,7 @@
 package visualizacao;
 
 import modelo.DadosOrdenacao;
+import ordenacao.Gerador;
 import ordenacao.Ordenacao;
 
 /**
@@ -16,21 +17,26 @@ import ordenacao.Ordenacao;
 public class principal {
     
     public static void main(String[] args) {
-        int[] vetor = {38,16,27,39,12,26,10,9,50,23};
+        int[] vetorOrdenar = Gerador.gerar(1000);
         Ordenacao ordenacao = new Ordenacao();
         DadosOrdenacao dadosOrdenacao = null;
         dadosOrdenacao = new DadosOrdenacao();
-        dadosOrdenacao = ordenacao.mergeSort(vetor, vetor.length, dadosOrdenacao);
+        dadosOrdenacao = ordenacao.mergeSort(vetorOrdenar, vetorOrdenar.length, dadosOrdenacao);
         
         System.out.println("Merge sort: ");
         System.out.println("Trocas: "+dadosOrdenacao.getTrocas());
         System.out.println("Comparações: "+dadosOrdenacao.getComparacoes());
         
+        for(int i=0;i<vetorOrdenar.length;i++){
+            System.out.print(vetorOrdenar[i]+" ,");
+        }        
         dadosOrdenacao = new DadosOrdenacao();
-        dadosOrdenacao = ordenacao.bubbleSort(vetor);
+        dadosOrdenacao = ordenacao.bubbleSort(vetorOrdenar);
         System.out.println("Bubble sort: ");
         System.out.println("Trocas: "+dadosOrdenacao.getTrocas());
         System.out.println("Comparações: "+dadosOrdenacao.getComparacoes());
+        
+        
         
     }
     
