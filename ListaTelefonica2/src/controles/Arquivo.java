@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * Classe responsavel pela manipulacao de arquivo.
+ *
  * @author Lucas
  */
 public class Arquivo {
@@ -22,7 +23,8 @@ public class Arquivo {
 
     /**
      * Classe construtora, abre o arquivo e inicialia as variaveis.
-     * @throws FileNotFoundException 
+     *
+     * @throws FileNotFoundException
      */
     public Arquivo() throws FileNotFoundException {
 
@@ -32,7 +34,7 @@ public class Arquivo {
 
         if (!this.file.exists()) {
             try {
-                if(!this.file.createNewFile()){
+                if (!this.file.createNewFile()) {
                     System.out.println("Erro ao tentar abrir o arquivo.");
                 }
             } catch (IOException ex) {
@@ -43,19 +45,21 @@ public class Arquivo {
     }
 
     /**
-     * Recebe uma string que contem os dados do contato, separados por ";" indicados pelo modelo do contato.
+     * Recebe uma string que contem os dados do contato, separados por ";"
+     * indicados pelo modelo do contato.
+     *
      * @param linha
-     * @throws IOException 
+     * @throws IOException
      */
     public void escreveLinhaArquivo(String linha) {
-        
+
         FileWriter fr;
         try {
             fr = new FileWriter(this.file, true);
             BufferedWriter bw = new BufferedWriter(fr);
             bw.append(linha);
             bw.newLine();
-            bw.close();            
+            bw.close();
         } catch (IOException ex) {
             Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,8 +80,10 @@ public class Arquivo {
     }
 
     /**
-     * Le a proxima linha do arquivo, retorna null se for o final do arquivo (EOF)
-     * @return 
+     * Le a proxima linha do arquivo, retorna null se for o final do arquivo
+     * (EOF)
+     *
+     * @return
      */
     public String leLinhaArquivo() {
         String linha = null;
@@ -87,6 +93,18 @@ public class Arquivo {
             ex.printStackTrace();
         }
         return linha;
+    }
+
+    public void esvaziaArquivo() {
+        try {
+            FileWriter fr;
+            fr = new FileWriter(this.file, false);
+            fr.write("");
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
