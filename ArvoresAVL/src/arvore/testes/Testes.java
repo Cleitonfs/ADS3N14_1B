@@ -11,7 +11,7 @@ package arvore.testes;
 import arvore.estrutura.ArvoreAVL;
 import arvore.estrutura.ArvoreBSP;
 import arvore.views.ImprimirArvore;
-import arvores.uteis.Uteis;
+import arvore.uteis.Uteis;
 import java.util.List;
 import java.util.Scanner;
 
